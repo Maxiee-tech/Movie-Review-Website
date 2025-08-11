@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MovieHub</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="dark-theme">
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="https://pbs.twimg.com/profile_images/1652962028716429313/JhQRLhKQ_400x400.jpg" alt="Logo" style="height:50px; vertical-align:middle; margin-right:8px; box-shadow: 0 2px 8px 0 white;">
+                    MovieHub
+                </a>
+            </div></a>
+            <ul class="nav-links">
+                <li><a href="/trending/">Trending</a></li>
+                <li><a href="/top-rated/">Top Rated</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/profile/">Profile</a></li>
+                    <li><a href="/logout/">Logout</a></li>
+                {% else %}
+                    <li><a href="/login/">Login</a></li>
+                    <li><a href="/signup/">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025 MovieHub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

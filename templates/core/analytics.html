@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Site Analytics</h1>
+<ul>
+    <li>Total Movies: {{ total_movies }}</li>
+    <li>Total Reviews: {{ total_reviews }}</li>
+    <li>Average Review Rating: {{ avg_rating|default_if_none:"N/A"|floatformat:1 }}</li>
+</ul>
+
+<h2>Top 5 Most Reviewed Movies</h2>
+<ul>
+    {% for movie in top_movies %}
+        <li>{{ movie.title }} ({{ movie.num_reviews }} reviews)</li>
+    {% empty %}
+        <li>No data available.</li>
+    {% endfor %}
+</ul>
+
+<h2>Recent Reviews</h2>
+<ul>
+    {% for review in recent_reviews %}
+        <li>
+            <strong>{{ review.movie.title }}</strong> by {{ review.user.username }}:
+            "{{ review.text|truncatechars:50 }}" ({{ review.rating }}/5)
+            <br>
+            <small>Reviewed on {{ review.created_at|date:"M d, Y" }}</small>
+        </li>
+    {% empty %}
+        <li>No recent reviews.</li>
+    {% endfor %}
+</ul>
+
+<h2>Top Reviewers</h2>
+<ul>
+    {% for reviewer in top_reviewers %}
+        <li>{{ reviewer.username }} ({{ reviewer.review_count }} reviews)</li>
+    {% empty %}
+        <li>No reviewer data available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

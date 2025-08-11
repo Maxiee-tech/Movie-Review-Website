@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<p>Analytics and admin tools will appear here.</p>
+
+<section>
+    <h2>Site Statistics</h2>
+    <ul>
+        <li>Total Users: 1,234</li>
+        <li>Total Reviews: 5,678</li>
+        <li>Active Movies: 123</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Recent Reviews</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Movie</th>
+                <th>Rating</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Max_Arts</td>
+                <td>Inception</td>
+                <td>5</td>
+                <td>2024-06-01</td>
+            </tr>
+            <tr>
+                <td>Lucy_Ma</td>
+                <td>Interstellar</td>
+                <td>4</td>
+                <td>2024-05-30</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Admin Actions</h2>
+    <button>Add New Movie</button>
+    <button>Manage Users</button>
+    <button>View Reports</button>
+</section>
+{% endblock %}

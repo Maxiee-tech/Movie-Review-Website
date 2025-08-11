@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Movies</h1>
+<ul>
+    {% for movie in movies %}
+        <li>
+            <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a>
+            <ul>
+                <li>Release Year: {{ movie.release_year }}</li>
+                <li>Genre: {{ movie.genre }}</li>
+                <li>Rating: {{ movie.rating }}</li>
+            </ul>
+            <p>{{ movie.description|truncatewords:20 }}</p>
+        </li>
+    {% empty %}
+        <li>No movies available.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'movies:create' %}">Add a new movie</a>
+{% endblock %}

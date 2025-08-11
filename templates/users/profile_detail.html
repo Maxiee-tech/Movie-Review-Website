@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ profile.user.username }}'s Profile</h2>
+{% if profile.avatar %}
+    <img src="{{ profile.avatar.url }}" alt="Avatar" style="width:120px; height:120px; border-radius:50%;">
+{% endif %}
+<p><strong>Bio:</strong> {{ profile.bio }}</p>
+<p><strong>Favorited Movies:</strong> {{ profile.favorited_movies.count }}</p>
+<ul>
+    {% for movie in profile.favorited_movies.all %}
+        <li>{{ movie.title }}</li>
+    {% empty %}
+        <li>No favorited movies yet.</li>
+    {% endfor %}
+</ul>
+<p><strong>Bookmarked Posts:</strong> {{ profile.bookmarked_posts.count }}</p>
+<ul>
+    {% for post in profile.bookmarked_posts.all %}
+        <li><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
+    {% empty %}
+        <li>No bookmarked posts yet.</li>
+    {% endfor %}
+</ul>
+<hr>
+<h3>Recent Reviews</h3>
+<ul>
+    {% for review in profile.user.review_set.all|slice:":5" %}
+        <li>
+            <strong>{{ review.movie.title }}</strong>: {{ review.text|truncatewords:20 }}
+            <br>
+            <small>Rated: {{ review.rating }}/10 on {{ review.created_at|date:"M d, Y" }}</small>
+        </li>
+    {% empty %}
+        <li>No reviews yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

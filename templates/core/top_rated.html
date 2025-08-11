@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="margin-left: 100px;">Top Rated Movies</h1>
+<ul>
+<div style="width:90%;margin:0 auto;text-align:left;">
+    {% for movie in movies %}
+        <li style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;">
+            {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }} poster" style="width:100px; height:150px; object-fit:cover; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+            {% endif %}
+            <div>
+                <strong>{{ movie.title }}</strong> (Rating: {{ movie.rating }})<br>
+                <em>Genre:</em> {{ movie.genre }}<br>
+                <em>Release Year:</em> {{ movie.release_year }}<br>
+                <em>Description:</em> {{ movie.description|truncatewords:20 }}
+            </div>
+        </li>
+    {% empty %}
+        <li>No movies found.</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h2>Submit Your Review</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="movie">Movie Title:</label>
+    <input type="text" id="movie" name="movie"><br><br>
+    <label for="rating">Rating (1-10):</label>
+    <input type="number" id="rating" name="rating" min="1" max="10"><br><br>
+    <label for="review">Review:</label><br>
+    <textarea id="review" name="review" rows="4" cols="50"></textarea><br><br>
+    <button type="submit">Submit Review</button>
+</form>
+<div>
+{% endblock %}

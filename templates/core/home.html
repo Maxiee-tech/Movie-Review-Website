@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome to MovieHub</h1>
+<p>Discover movies, reviews, and more!</p>
+
+<section>
+    <div id="latest-movies">
+        <h2 style="margin-left: 0.5rem;">Latest Movies</h2>
+    <ul style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem; list-style: none; padding: 0; max-width: 1260px; margin: 0 auto;">
+            {% for movie in movies %}
+                <li style="text-align: center;">
+                    {% if movie.poster %}
+                        <a href="{% url 'movies:detail' movie.id %}">
+                            <img src="{{ movie.poster.url }}" alt="{{ movie.title }} poster" style="width:170px; height:250px; object-fit:cover; display: block; margin: 0 auto 0.5rem auto; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.10);">
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'movies:detail' movie.id %}" style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:170px; margin:0 auto;">
+                        {{ movie.title|truncatechars:18 }}
+                    </a>
+                </li>
+        {% empty %}
+            <li>No movies found.</li>
+        {% endfor %}
+    </ul>
+    </div>
+</section><br>
+
+<section>
+    <div id="latest-movies">
+    <h2>Latest Reviews</h2>
+    <ul>
+        <li>
+            <strong>Inception</strong> - "A mind-bending thriller!" <em>~ by Alice</em>
+        </li>
+        <li>
+            <strong>The Godfather</strong> - "A timeless classic." <em>~ by Bob</em>
+        </li>
+        <li>
+            <strong>Interstellar</strong> - "Visually stunning and emotional." <em>by Carol</em>
+        </li>
+        <li>
+            <strong>Parasite</strong> - "An extraordinary film that masterfully blends suspense, social commentary, and dark humor. The twists kept me on the edge of my seat throughout." <em>~ by Daniel</em>
+        </li>
+        <li>
+            <strong>La La Land</strong> - "A beautiful homage to classic musicals with stunning visuals and a heartfelt story about dreams and love." <em>~ by Emily</em>
+        </li>
+        <li>
+            <strong>Avengers: Endgame</strong> - "An epic conclusion to over a decade of storytelling. The action sequences were incredible, and the emotional payoff was well worth the wait." <em>~ by Frank</em>
+        </li>
+        <li>
+            <strong>Spirited Away</strong> - "A magical journey filled with wonder and imagination. Miyazaki's masterpiece never fails to inspire." <em>~ by Grace</em>
+        </li>
+        <li>
+            <strong>Joker</strong> - "A haunting and powerful performance by Joaquin Phoenix. The film offers a chilling look at society and mental health." <em>~ by Henry</em>
+        </li>
+    </ul>
+</div>
+</section><br>
+
+<section>
+    <div id="latest-movies">
+    <h2>Join the Community</h2>
+    <p>
+    <a href="{% url 'users:register' %}">Sign up</a> or <a href="{% url 'users:login' %}">log in</a> to write your own reviews!
+    </p>
+</div>
+</section>
+{% endblock %}

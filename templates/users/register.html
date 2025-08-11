@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Sign Up</h2>
+<form method="post"></form>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="{% url 'users:login' %}">Login here</a>.</p>
+
+<hr>
+
+<h3>Why Join?</h3>
+<ul>
+    <li>Write and share your own movie reviews</li>
+    <li>Rate and comment on movies</li>
+    <li>Connect with other movie enthusiasts</li>
+</ul>
+
+{% if form.errors %}
+    <div class="error">
+        <strong>Please correct the errors below:</strong>
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+{% endblock %}

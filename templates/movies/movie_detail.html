@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h2>{{ movie.title }}</h2>
+<div style="display: flex; align-items: flex-start; gap: 2rem; margin-bottom: 2rem;">
+    {% if movie.poster %}
+        <img src="{{ movie.poster.url }}" alt="Poster" style="max-width:200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+    {% endif %}
+    <div>
+        <p>{{ movie.description }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p><strong>Rating:</strong> {{ movie.rating }}</p>
+    </div>
+</div>
+
+
+<h3>User Reviews</h3>
+<ul>
+    {% for review in movie.reviews.all %}
+        <li>
+            <strong>{{ review.reviewer_name }}</strong> ({{ review.rating }}/10):<br>
+            {{ review.review_text }}
+        </li>
+    {% empty %}
+        <li>No reviews yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Add a Review</h3>
+<form method="post" action="{% url 'reviews:add' %}">
+    {% csrf_token %}
+    <input type="hidden" name="movie" value="{{ movie.id }}">
+    <label for="reviewer_name">Your Name:</label>
+    <input type="text" name="reviewer_name" required><br>
+    <label for="rating">Rating:</label>
+    <input type="number" name="rating" min="1" max="10" required><br>
+    <label for="review_text">Comment:</label><br>
+    <textarea name="review_text" rows="4" cols="40" required></textarea><br>
+    <button type="submit">Submit Review</button>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Movie</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if form.instance.poster %}
+        <img src="{{ form.instance.poster.url }}" alt="Current poster" style="max-width:100px;">
+    {% endif %}
+    <button type="submit">Save</button>
+</form>
+
+<hr>
+
+<h3>Tips for Adding a Movie</h3>
+<ul>
+    <li>Ensure the movie title is spelled correctly.</li>
+    <li>Provide the release year if possible.</li>
+    <li>Include a brief description or review.</li>
+</ul>
+
+<a href="{% url 'movies:movie_list' %}">Back to Movie List</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>New Blog Post</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+<hr>
+
+<h3>Tips for Writing a Great Blog Post</h3>
+<ul>
+    <li>Choose an engaging title.</li>
+    <li>Write a clear and concise introduction.</li>
+    <li>Use headings and lists to organize your content.</li>
+    <li>Share your personal insights or experiences.</li>
+    <li>Proofread before submitting.</li>
+</ul>
+
+<a href="{% url 'blog:list' %}">Back to Blog Posts</a>
+{% endblock %}
