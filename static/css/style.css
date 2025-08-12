@@ -35,8 +35,10 @@ body.dark-theme {
     transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: #ff4c29;
+
+.nav-links a:hover,
+a:hover {
+    color: #ff784e;
 }
 
 header, footer {
